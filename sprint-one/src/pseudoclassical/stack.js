@@ -8,17 +8,17 @@ var Stack = function() {
 
 Stack.prototype.push = function(value) {
   this.storage[++this.nums] = value;
-}
+};
 Stack.prototype.size = function() {
   return this.nums;
-}
+};
 Stack.prototype.pop = function() {
-  if(this.nums > 0){
-     var val = this.storage[this.nums];
-     delete val;
+  if (this.nums > 0) {
+    var val = this.storage[this.nums];
+    delete val;
     this.nums--;
     return val;
   }
-}
+};
 
 var test = new Stack();
