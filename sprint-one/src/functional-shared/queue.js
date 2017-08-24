@@ -21,9 +21,9 @@ var queueMethods = {
         delete this.memory[key];
 
       }
-       this.num--;
+      this.num--;
     }
-       return tempVal;
+    return tempVal;
 
   },
   size :function() {
