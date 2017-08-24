@@ -19,11 +19,11 @@ var queueMethods = {
     var temp = this.storage[0];
     delete this.storage[0];
     if (this.nums > 0) {
-      for (var key in this.storage){
+      for (var key in this.storage) {
         this.storage[key - 1] = this.storage[key];
         delete this.storage[key];
       }
-        this.nums--;
+      this.nums--;
     }
     return temp;
   },
