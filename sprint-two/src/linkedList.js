@@ -3,19 +3,18 @@ var LinkedList = function() {
   list.head = null;
   list.tail = null;
 
-  list.addToTail = function(value) {
+  list.addToTail = function (value) {
     var node = new Node(value);
-      if(list.tail === null){
-        list.head = node;
-        list.tail = node;
-        //list.head;
-      } else {
-     console.log(list.head);
-     list.tail.next = node;
-     list.tail = node;
-     console.log(list.head);
-      }
-};
+
+    if(list.tail === null){
+      list.head = node;
+      list.tail = node; //list.head;
+
+    } else {
+      list.tail.next = node;
+      list.tail = node;
+    }
+  };
   list.removeHead = function() {
     var currentNode = list.head;
     list.head = currentNode.next;
@@ -45,5 +44,8 @@ var Node = function(value) {
 
   return node;
 };
-// Complexity
-
+/* Complexity
+addToTail 0(1)
+removeHead 0(1)
+contains 0(n)
+*/
