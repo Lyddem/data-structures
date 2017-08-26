@@ -1,56 +1,79 @@
 var BinarySearchTree = function(value) {
 
-var binaryTree = {};
+var binaryTree = Object.create(biTreeMethods);
 
-binaryTree.root = new treeNode(value);
+binaryTree.value = value;
+binaryTree.left = null;
+binaryTree.right = null;
 
-_.extend(binaryTree,biTreeMethods);
 return binaryTree;
 }
 
 var biTreeMethods = {};
 biTreeMethods.insert = function (value) {
-   var newNode = new treeNode(value);
-    if (this.root === undefined) {
-      this.root = newNode;
-    } else {
-      var currentNode = this.root //5
-        while (currentNode !== null) {
-          if (currentNode.value > value) {
-              if(currentNode.left === null) {
-               currentNode.left = newNode;
-                break;
-              }
-             currentNode = currentNode.left;  // undefined
-          } else {
-            if(currentNode.right === null) {
-               currentNode.right = newNode;
-                break;
-              }
-            currentNode = currentNode.right;
-          }
+  var current = this;
+  var node = new BinarySearchTree(value);
+    while(current !== null) {
+      if(node.value < current.value) {
+        if(current.left === null) {
+          current.left = node;
+          break;
         }
+        current = current.left;
+
+      } else if (node.value > current.value) {
+        if(current.right === null) {
+          current.right = node;
+          break;
+        }
+        current = current.right;
       }
+    }
 };
 
+biTreeMethods.contains = function(val) {
 
-biTreeMethods.contains = function() {
-};
-
-biTreeMethods.depthFirstLog = function() {
-};
-
-
-  function treeNode(val){
-    var  node ={}
-    node.value = val;
-    node.left = null;
-    node.right = null;
-    return node
+  function recursion(root) {
+    if(root === null) {
+      return false;
+    } else {
+      if(root.value > val) {
+        return recursion(root.left);
+      } else if(root.value < val) {
+        return recursion(root.right)
+      } else {
+        return true;
+      }
+    }
   }
+  return recursion(this)
+};
+
+biTreeMethods.depthFirstLog = function(cb) {
+
+  function recurse (root) {
+  if(root.left !== null) {
+     cb(root.value);
+     return recurse(root.left);
+  }
+  if(root.right !== null) {
+    cb(root.value);
+    return recurse(root.right);
+  }
+  if(root.left === null && root.right == null){
+    cb(root.value);
+    return root;
+  }
+
+  }
+return recurse(this);
+};
 
 /*
  * Complexity: What is the time complexity of the above functions?
+ insert O(logn);
+ contains O(logn);
+ depthFirstLog O(n);
  */
 
 
